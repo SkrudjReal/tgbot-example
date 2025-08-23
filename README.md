@@ -20,7 +20,7 @@ A clean, async-ready Telegram bot template built with [aiogram 3.x] (aiogram==3.
 ## ⚙️ Installation
 
 ```bash
-git clone git@github.com:SkrudjReal/tgbot-example.git
+git clone https://github.com/SkrudjReal/tgbot-example.git
 cd tgbot-example
 poetry install --no-root
 cp settings.env.example settings.env  # Create and edit environment config

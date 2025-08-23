@@ -6,7 +6,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from asyncmy.pool import Pool
 from redis.asyncio import Redis
 
-from core.utils.db_api.create_database import create_pool, db_setup
+from core.utils.db_api.database import create_mysql_pool, db_setup
 from core.utils.commands import set_commands, del_commands
 from core.middlewares import DBPoolMiddleware, ThrottlingMiddleware
 from core.service.loop_task import scheduler_tasks
@@ -30,7 +30,7 @@ async def main():
     
     bot = Bot(token=settings.bot.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
-    pool = await create_pool()
+    pool = await create_mysql_pool()
     redis = Redis(host=settings.redis.ip, port=6379, decode_responses=True)
     scheduler = AsyncIOScheduler()
     

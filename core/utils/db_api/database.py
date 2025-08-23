@@ -4,7 +4,7 @@ from core.settings import settings
 
 import asyncmy
 
-async def create_pool() -> Pool:
+async def create_mysql_pool() -> Pool:
     """
     Create a connection pool to the MySQL database.
     """
