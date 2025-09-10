@@ -4,10 +4,28 @@ from core.settings import settings
 
 import asyncmy
 
+async def ensure_database_exists():
+    """
+    Ensure the target database exists.
+    Connect to MySQL without specifying db, create the DB if missing.
+    """
+    conn = await asyncmy.connect(
+        host=settings.db.ip,
+        port=3306,
+        user=settings.db.user,
+        password=settings.db.password,
+        autocommit=True,
+    )
+    async with conn.cursor() as cur:
+        await cur.execute(f"CREATE DATABASE IF NOT EXISTS `{settings.db.db}`")
+    conn.close()
+
 async def create_mysql_pool() -> Pool:
     """
     Create a connection pool to the MySQL database.
     """
+    await ensure_database_exists()
+    
     return await asyncmy.create_pool(
         host=settings.db.ip,
         port=3306,
