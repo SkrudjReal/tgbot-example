@@ -2,6 +2,8 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram import Bot, Dispatcher
 
+from aiogram_dialog import setup_dialogs
+
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from asyncmy.pool import Pool
 from redis.asyncio import Redis
@@ -37,6 +39,7 @@ async def main():
     await db_setup(pool)
     await setup_middlewares(dp, pool, redis, bot)
     setup_routers(dp)
+    setup_dialogs(dp)
     
     await del_commands(bot)
     await set_commands(bot)
